@@ -139,7 +139,7 @@ class ZohoCampaign {
 	        	$product = $key['data'];
 	            array_push($product_arr,$product->get_id());
 	        }
-	        $a = array('id' => $user_id, 'total_price' => $woo->cart->total, 'checkout_url' => wc_get_checkout_url(), 'line_items' => $product_arr,'id' => $user_id,'currency' => get_woocommerce_currency());
+	        $a = array('id' => $user_id, 'user_email' => $current_user->user_email, 'total_price' => $woo->cart->total, 'checkout_url' => wc_get_checkout_url(), 'line_items' => $product_arr,'currency' => get_woocommerce_currency());
 			$zcwc_domname = 'com';
 			$id="";
 			$od="";
@@ -164,7 +164,7 @@ class ZohoCampaign {
 	        {
 	        	$zcwc_cart_action = 'cart.deleted';
 	        }
-	    	$headarray = array('Content-type' => 'application/json', 'x-wc-webhook-topic' => $zcwc_cart_action ,'x-wc-webhook-referer' => 'zoho campaign plugin');
+	    	$headarray = array('Content-type' => 'application/json', 'x-wc-webhook-topic' => $zcwc_cart_action ,'x-wc-webhook-referer' => 'zoho campaign plugin','x-zohocampaign-plugin-version' => ZC4WP_VERSION);
 	    	$query_string = http_build_query(['id' => $id, 'od' => $od]);
 			$url= ZC4WP__CAMPAIGN_URL. $zcwc_domname . '/ua/ecommercecallback.zc?' . $query_string;
 			$response = wp_remote_request( $url, array(

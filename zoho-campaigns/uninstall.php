@@ -5,7 +5,7 @@
  * Uninstalling Zoho Campaigns deletes user data, settings, tables, and options.
  *
  * @package Zoho Campaigns\Uninstaller
- * @version 2.1.0
+ * @version 2.1.1
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
@@ -30,7 +30,11 @@ if(get_option('zcwc_domname'))
 {
 	$zcwc_domname = get_option('zcwc_domname');
 }
-$url= 'https://campaigns.zoho.' . $zcwc_domname . '/api/v2/woocommerce/deny?' . $query_string;
+$campaign_url = ZC4WP__CAMPAIGN_URL;
+if($zcwc_domname=='ca')	{
+		$campaign_url = ZC4WP__CAMPAIGN_URL_CA;
+}
+$url= $campaign_url . $zcwc_domname . '/api/v2/woocommerce/deny?' . $query_string;
 			$response = wp_remote_request( $url, array(
 		    'method'      => 'POST',
 		    'headers'     => $headarray
