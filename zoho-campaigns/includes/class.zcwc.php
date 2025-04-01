@@ -164,15 +164,21 @@ class ZohoCampaign {
 	        {
 	        	$zcwc_cart_action = 'cart.deleted';
 	        }
-	    	$headarray = array('Content-type' => 'application/json', 'x-wc-webhook-topic' => $zcwc_cart_action ,'x-wc-webhook-referer' => 'zoho campaign plugin','x-zohocampaign-plugin-version' => ZC4WP_VERSION);
-	    	$query_string = http_build_query(['id' => $id, 'od' => $od]);
-			$url= ZC4WP__CAMPAIGN_URL. $zcwc_domname . '/ua/ecommercecallback.zc?' . $query_string;
-			$response = wp_remote_request( $url, array(
-		    'method'      => 'POST',
-		    'body'        => wp_json_encode($a,true),
-		    'headers'     => $headarray,
-		    'data_format' => 'body',
-		    ) );
+				if(od!="" && id!="")	{
+		    	$headarray = array('Content-type' => 'application/json', 'x-wc-webhook-topic' => $zcwc_cart_action ,'x-wc-webhook-referer' => 'zoho campaign plugin','x-zohocampaign-plugin-version' => ZC4WP_VERSION);
+		    	$query_string = http_build_query(['id' => $id, 'od' => $od]);
+					$campaign_url = ZC4WP__CAMPAIGN_URL;
+					if($zcwc_domname=='ca')	{
+							$campaign_url = ZC4WP__CAMPAIGN_URL_CA;
+					}
+					$url= $campaign_url. $zcwc_domname . '/ua/ecommercecallback.zc?' . $query_string;
+					$response = wp_remote_request( $url, array(
+				    'method'      => 'POST',
+				    'body'        => wp_json_encode($a,true),
+				    'headers'     => $headarray,
+				    'data_format' => 'body',
+				    ) );
+				}
 	    }
 	}
 
@@ -250,7 +256,11 @@ class ZohoCampaign {
 	   	if($recurrence < 2)
 	   	{
 	    	$query_string = http_build_query(['service' => 'WooCommerce', 'zc_rid' => $zc_rid ,'order_id' => $order_id]);
-			$url= ZC4WP__CAMPAIGN_URL. $zcwc_domname . '/ua/ecommercetracking.zc?' . $query_string;
+				$campaign_url = ZC4WP__CAMPAIGN_URL;
+				if($zcwc_domname=='ca')	{
+						$campaign_url = ZC4WP__CAMPAIGN_URL_CA;
+				}
+			$url= $campaign_url. $zcwc_domname . '/ua/ecommercetracking.zc?' . $query_string;
 			$logger->add('zcwc_track_order_event_action_url', $url);
 			$response = wp_remote_get($url);
 		    $logger->add('zcwc_track_order_event_action', $response);
@@ -268,7 +278,11 @@ class ZohoCampaign {
 				$zcwc_domname = get_option('zcwc_domname');
 			}
 			$query_string = http_build_query(['service' => 'WooCommerce', 'zc_rid' => $_COOKIE["zc_rid"] ,'order_id' => $order_id]);
-			$url= ZC4WP__CAMPAIGN_URL. $zcwc_domname . '/ua/ecommercetracking.zc?' . $query_string;
+			$campaign_url = ZC4WP__CAMPAIGN_URL;
+			if($zcwc_domname=='ca')	{
+					$campaign_url = ZC4WP__CAMPAIGN_URL_CA;
+			}
+			$url= $campaign_url. $zcwc_domname . '/ua/ecommercetracking.zc?' . $query_string;
 			$response = wp_remote_get($url);
 		    if( wp_remote_retrieve_response_code( $response ) != 200 ) {
 		    	wp_schedule_single_event( time() + 120, 'zcwc_track_order_event_hook' , array($order_id, 0, $_COOKIE["zc_rid"]));

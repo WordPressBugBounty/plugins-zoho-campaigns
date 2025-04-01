@@ -164,7 +164,11 @@ switch ($end) {
           {
             $zcwc_domname = get_option('zcwc_domname');
           }
-          print_r(ZC4WP__CAMPAIGN_URL. $zcwc_domname . '/campaigns/org' .ZohoCampaign_Admin::zcwc_get_parsed_val('zcwc_store_stats','org_url_digest'). '/home.do#e-commerce'); ?>" target="_blank"
+          $campaign_url = ZC4WP__CAMPAIGN_URL;
+          if($zcwc_domname=='ca')	{
+          		$campaign_url = ZC4WP__CAMPAIGN_URL_CA;
+          }
+          print_r($campaign_url. $zcwc_domname); ?>" target="_blank"
           class="zmhbtn zmhpri">Open Zoho Campaigns</a></div><div class="tbl w100
         ">
         <div>

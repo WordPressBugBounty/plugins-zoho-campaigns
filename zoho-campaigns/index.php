@@ -2,7 +2,7 @@
 /*
    Plugin Name:Zoho Campaigns
    Plugin URI:https://help.zoho.com/portal/kb/articles/zoho-campaigns-plugin-for-wordpress-version-2
-   Version:2.1.1
+   Version:2.1.2
    Author:Zoho Campaigns
    Author URI:https://www.zoho.com/campaigns/
    Description:With the Zoho Campaigns plugin, convert your website visitors into leads by embedding signup forms on your Wordpress pages, sync your WooCommerce store's details, and conveniently set up targeted e-commerce campaigns using workflows.
@@ -27,7 +27,7 @@
 // Prevent direct accesss
 defined( 'ABSPATH' ) or exit;
 
-define( 'ZC4WP_VERSION', '2.1.1' );
+define( 'ZC4WP_VERSION', '2.1.2' );
 define( 'ZC4WP__MINIMUM_WP_VERSION', '5.0' );
 define( 'ZC4WP__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ZC4WP__ACCOUNTS_URL', 'https://accounts.zoho.' );
