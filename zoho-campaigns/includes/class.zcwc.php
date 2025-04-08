@@ -164,7 +164,7 @@ class ZohoCampaign {
 	        {
 	        	$zcwc_cart_action = 'cart.deleted';
 	        }
-				if(od!="" && id!="")	{
+				if($od!="" && $id!="")	{
 		    	$headarray = array('Content-type' => 'application/json', 'x-wc-webhook-topic' => $zcwc_cart_action ,'x-wc-webhook-referer' => 'zoho campaign plugin','x-zohocampaign-plugin-version' => ZC4WP_VERSION);
 		    	$query_string = http_build_query(['id' => $id, 'od' => $od]);
 					$campaign_url = ZC4WP__CAMPAIGN_URL;
