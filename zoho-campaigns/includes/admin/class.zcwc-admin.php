@@ -202,10 +202,11 @@ class ZohoCampaign_Admin {
 					if (!empty($users)) {
 					    foreach ($users as $user)
 					    {
-					    	if(get_user_meta($user->ID, 'zcwc_newsletter_subscription', true) == '')
-					    	{
-					    		add_user_meta( $user->id, 'zcwc_newsletter_subscription', true );
-					    	}
+							// If the user doesn't already have the meta, add it and set to true
+							if(get_user_meta($user->ID, 'zcwc_newsletter_subscription', true) == '')
+							{
+								add_user_meta( $user->ID, 'zcwc_newsletter_subscription', true );
+							}
 					    }
 					}
 				}
@@ -216,7 +217,8 @@ class ZohoCampaign_Admin {
 					if (!empty($users)) {
 					    foreach ($users as $user)
 					    {
-					      delete_user_meta( $user->id, 'zcwc_newsletter_subscription', true );
+						  // Remove the user's newsletter subscription meta
+						  delete_user_meta( $user->ID, 'zcwc_newsletter_subscription' );
 					    }
 					}
 				}

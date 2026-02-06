@@ -2,7 +2,7 @@
 /*
    Plugin Name:Zoho Campaigns
    Plugin URI:https://help.zoho.com/portal/kb/articles/zoho-campaigns-plugin-for-wordpress-version-2
-   Version:2.1.3
+   Version:2.1.5
    Author:Zoho Campaigns
    Author URI:https://www.zoho.com/campaigns/
    Description:With the Zoho Campaigns plugin, convert your website visitors into leads by embedding signup forms on your Wordpress pages, sync your WooCommerce store's details, and conveniently set up targeted e-commerce campaigns using workflows.
@@ -27,7 +27,7 @@
 // Prevent direct accesss
 defined( 'ABSPATH' ) or exit;
 
-define( 'ZC4WP_VERSION', '2.1.3' );
+define( 'ZC4WP_VERSION', '2.1.5' );
 define( 'ZC4WP__MINIMUM_WP_VERSION', '5.0' );
 define( 'ZC4WP__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ZC4WP__ACCOUNTS_URL', 'https://accounts.zoho.' );
@@ -36,10 +36,10 @@ define( 'ZC4WP__CAMPAIGN_URL', 'https://campaigns.zoho.' );
 define( 'ZC4WP__CAMPAIGN_URL_CA', 'https://campaigns.zohocloud.' );
 
 function zcwc_registration_save( $user_id ) {
-    if(isset($_POST['zc_optin_checkbox']) && get_user_meta($user_id, 'zcwc_newsletter_subscription', true) == '')
-     {
-        add_user_meta( $user_id, 'zcwc_newsletter_subscription', true );
-     }
+  // Save newsletter subscription state based on the presence of the opt-in checkbox.
+  $is_checked = isset($_POST['zc_optin_checkbox']) && $_POST['zc_optin_checkbox'];
+  // Use update_user_meta to create or update the meta consistently.
+  update_user_meta( $user_id, 'zcwc_newsletter_subscription', (bool) $is_checked );
   }
 require_once( ZC4WP__PLUGIN_DIR . 'includes/class.zcwc.php' );
 add_action( 'init', array( 'ZohoCampaign', 'zcwc_init' ) );

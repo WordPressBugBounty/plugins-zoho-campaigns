@@ -9,13 +9,10 @@ class ZohoCampaign {
 	  $current_user = wp_get_current_user();
 	   if($current_user != null)
 	   {
-        if(isset($_POST['zc_optin_checkbox']) && get_user_meta($current_user->ID, 'zcwc_newsletter_subscription', true) == '')
-         {
-            update_user_meta( $current_user->ID, 'zcwc_newsletter_subscription', true );
-         }
-           else {
-               update_user_meta( $current_user->ID, 'zcwc_newsletter_subscription', false );
-           }
+				// Set the newsletter subscription meta based solely on whether the checkbox was submitted.
+				// Use update_user_meta so it will create or update the meta as needed.
+				$is_checked = isset($_POST['zc_optin_checkbox']) && $_POST['zc_optin_checkbox'];
+				update_user_meta( $current_user->ID, 'zcwc_newsletter_subscription', (bool) $is_checked );
 	   }
 	 }
 	public static function zcwc_init() {
