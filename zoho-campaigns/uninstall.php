@@ -5,7 +5,7 @@
  * Uninstalling Zoho Campaigns deletes user data, settings, tables, and options.
  *
  * @package Zoho Campaigns\Uninstaller
- * @version 2.1.5
+ * @version 2.1.6
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
