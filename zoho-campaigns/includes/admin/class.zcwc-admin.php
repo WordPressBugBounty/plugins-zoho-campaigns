@@ -352,6 +352,10 @@ class ZohoCampaign_Admin {
 				$campaign_url = ZC4WP__CAMPAIGN_URL_CA;
 		}
 		$headarray = array('Authorization' => 'Zoho-oauthtoken '. self::zcwc_get_parsed_val('zcwc_token_details','access_token') );
+		// Add x-workspace header only for the validate endpoint, hardcoded to '-1'
+		if( strpos( $endpoint, '/api/v2/woocommerce/validate' ) !== false ) {
+			$headarray['x-workspace'] = '-1';
+		}
 		$auth_url = $campaign_url. $zcwc_domname . $endpoint;
 		$response = wp_remote_request( $auth_url, array(
 	    'method'      => $req_type,

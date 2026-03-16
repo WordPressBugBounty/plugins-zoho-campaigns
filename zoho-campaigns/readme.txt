@@ -3,7 +3,7 @@ Contributors:Zoho Campaigns
 Tags: Email marketing, Marketing automation, Signup forms, Abandoned cart, WooCommerce
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag:2.1.6
+Stable tag:2.1.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +78,8 @@ In case, you are not sure on how to proceed with the Zoho Campaigns plugin, feel
 
 
 == Changelog ==
+= 2.1.7 =
+* Minor issue fix
 = 2.1.6 =
 * Minor issue fix
 = 2.1.5 =
