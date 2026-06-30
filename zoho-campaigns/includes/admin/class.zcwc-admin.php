@@ -353,7 +353,7 @@ class ZohoCampaign_Admin {
 		}
 		$headarray = array('Authorization' => 'Zoho-oauthtoken '. self::zcwc_get_parsed_val('zcwc_token_details','access_token') );
 		// Add x-workspace header only for the validate endpoint, hardcoded to '-1'
-		if( strpos( $endpoint, '/api/v2/woocommerce/validate' ) !== false ) {
+		if( strpos( $endpoint, '/api/v2/woocommerce/validate' ) !== false || strpos( $endpoint, '/api/v2/forms' ) !== false ) {
 			$headarray['x-workspace'] = '-1';
 		}
 		$auth_url = $campaign_url. $zcwc_domname . $endpoint;

@@ -24,9 +24,11 @@ class ZohoCampaign {
 	public static function zcwc_init_hooks() {
 		self::$initiated = true;
 		add_shortcode( 'zcwp', array('ZohoCampaign', 'zcwc_form_sc') );
-		add_action('wp_enqueue_scripts', array('ZohoCampaign','zcwc_find_footer_tracking_codes') );
+		// zc_rid usage disabled: footer capture script no longer registered.
+		//add_action('wp_enqueue_scripts', array('ZohoCampaign','zcwc_find_footer_tracking_codes') );
 		//add_action('zcwc_refresh_forms_event', array('ZohoCampaign','zcwc_refresh_forms_event_hook'),10);
-		add_action('zcwc_track_order_event_hook', array('ZohoCampaign','zcwc_track_order_event_action'),10,2);
+		// zc_rid usage disabled: conversion-tracking retry cron no longer registered.
+		//add_action('zcwc_track_order_event_hook', array('ZohoCampaign','zcwc_track_order_event_action'),10,2);
 		/**
 		 * Add opt-in checkbox
 		 **/
@@ -41,7 +43,8 @@ class ZohoCampaign {
 		add_action('woocommerce_after_cart_totals',array('ZohoCampaign','zcwc_checkout_started'));
 		add_action('woocommerce_before_checkout_billing_form',array('ZohoCampaign','zcwc_checkout_started'));
 		add_action('woocommerce_cart_item_removed',array('ZohoCampaign','zcwc_checkout_started'));
-		add_action('woocommerce_checkout_order_processed',array('ZohoCampaign','zcwc_order_placed'),10,1);
+		// zc_rid usage disabled: order conversion ping no longer registered.
+		//add_action('woocommerce_checkout_order_processed',array('ZohoCampaign','zcwc_order_placed'),10,1);
 	}
 
 	public static function zcwc_form_sc($attr) {
